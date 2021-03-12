@@ -59,8 +59,10 @@ while running:
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
 				direction = 1
+			#	x += 20
 			elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
 				direction = -1
+			#	x -= 20
 			if event.key == pygame.K_w:
 				firing = True
 				flag = True
@@ -95,10 +97,10 @@ while running:
 				fire_rect[i] = pygame.draw.rect(screen, orange, (fire_x[i], fire_y[i], 10, 40))
 				fire_y[i] -= fire_speed
 				
-			for j in range(en_count):
-				if fire_x[i] >= en_x[j] and fire_x[i] <= en_x[j] + en_w and fire_y[i] <= en_y[j]+en_h and fire_y[i] >= en_y[j] and j not in en_blacklisted:
-					en_blacklisted.append(j)
-					score += 1
+				for j in range(en_count):
+					if fire_x[i] > en_x[j] and fire_x[i] < en_x[j] + en_w and fire_y[i] < en_y[j]+en_h and fire_y[i] > en_y[j] and j not in en_blacklisted:
+						en_blacklisted.append(j)
+						score += 1
 				
 	#enemies
 	if counter % constant == 0:
